@@ -1,0 +1,34 @@
+﻿@model ProdutoModel
+@{
+    ViewData["Title"] = "Editar produto";
+}
+
+<div class="text-center">
+
+    <h1 class="display-4">Editar produto</h1>
+
+</div>
+
+<form asp-controller="Produto" asp-action="Alterar" method="post">
+
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label for="nome" class="form-label">Nome</label>
+        <input type="text" asp-for="Nome" class="form-control" placeholder="Digite o nome do produto">
+        @Html.ValidationMessageFor(x => x.Nome)
+    </div>
+    <div class="form-group">
+        <label for="descricao" class="form-label">Descricao</label>
+        <input type="text" asp-for="Descricao" class="form-control" placeholder="Informe a descrição do produto">
+        @Html.ValidationMessageFor(x => x.Descricao)
+    </div>
+    <div class="form-group">
+        <label for="quantidade" class="form-label">Quantidade</label>
+        <input type="text" asp-for="Quantidade" class="form-control" placeholder="Informe a quantidade do produto">
+        @Html.ValidationMessageFor(x => x.Quantidade)
+    </div>
+    <br />
+
+    <button type="submit" class="btn btn-primary w-100">Alterar</button>
+    <a class="btn btn-secondary w-100" asp-controller="Produto" asp-action="Index" role="button" style="margin-top: 5px;">Voltar</a>
+</form>
