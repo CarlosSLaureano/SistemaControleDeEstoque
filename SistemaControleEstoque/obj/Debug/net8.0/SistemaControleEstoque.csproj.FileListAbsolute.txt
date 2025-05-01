@@ -189,3 +189,4 @@ C:\Dev\SistemaControleEstoque\SistemaControleEstoque\obj\Debug\net8.0\SistemaCon
 C:\Dev\SistemaControleEstoque\SistemaControleEstoque\obj\Debug\net8.0\ref\SistemaControleEstoque.dll
 C:\Dev\SistemaControleEstoque\SistemaControleEstoque\obj\Debug\net8.0\SistemaControleEstoque.sourcelink.json
 C:\Dev\SistemaControleEstoque\SistemaControleEstoque\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Dev\SistemaControleEstoque\SistemaControleEstoque\bin\Debug\net8.0\vercel.json
