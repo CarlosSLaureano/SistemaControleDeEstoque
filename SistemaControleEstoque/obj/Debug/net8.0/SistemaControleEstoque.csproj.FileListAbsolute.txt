@@ -181,10 +181,11 @@ C:\Dev\SistemaControleEstoque\SistemaControleEstoque\obj\Debug\net8.0\staticweba
 C:\Dev\SistemaControleEstoque\SistemaControleEstoque\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.SistemaControleEstoque.props
 C:\Dev\SistemaControleEstoque\SistemaControleEstoque\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.SistemaControleEstoque.props
 C:\Dev\SistemaControleEstoque\SistemaControleEstoque\obj\Debug\net8.0\staticwebassets.pack.json
-C:\Dev\SistemaControleEstoque\SistemaControleEstoque\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Dev\SistemaControleEstoque\SistemaControleEstoque\obj\Debug\net8.0\SistemaC.9EA4D18D.Up2Date
 C:\Dev\SistemaControleEstoque\SistemaControleEstoque\obj\Debug\net8.0\SistemaControleEstoque.dll
 C:\Dev\SistemaControleEstoque\SistemaControleEstoque\obj\Debug\net8.0\refint\SistemaControleEstoque.dll
 C:\Dev\SistemaControleEstoque\SistemaControleEstoque\obj\Debug\net8.0\SistemaControleEstoque.pdb
 C:\Dev\SistemaControleEstoque\SistemaControleEstoque\obj\Debug\net8.0\SistemaControleEstoque.genruntimeconfig.cache
 C:\Dev\SistemaControleEstoque\SistemaControleEstoque\obj\Debug\net8.0\ref\SistemaControleEstoque.dll
+C:\Dev\SistemaControleEstoque\SistemaControleEstoque\obj\Debug\net8.0\SistemaControleEstoque.sourcelink.json
+C:\Dev\SistemaControleEstoque\SistemaControleEstoque\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

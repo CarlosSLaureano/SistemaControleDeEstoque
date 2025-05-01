@@ -68,8 +68,14 @@ body {
 }
 
 
+.alert {
+    position: relative;
+}
 
-
+.btn-close {
+    position: absolute;
+    left: 10px; /* Ajuste conforme necessário */
+}
 
 
 
