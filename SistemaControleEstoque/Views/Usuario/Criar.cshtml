@@ -1,48 +1,69 @@
 ﻿@using SistemaControleEstoque.Enums
 @model UsuarioModel
+
 @{
     ViewData["Title"] = "Cadastrar usuário";
 }
 
-<div class="text-center">
+@section BackgroundImage {
+    <div class="usuario-background-image"></div>
+}
 
-    <h1 class="display-4">Cadastrar usuário</h1>
+<div class="d-flex justify-content-center align-items-start min-vh-100 pt-4">
 
+    <div class="produto-box p-4 rounded shadow" style="max-width: 600px; width: 100%;">
+        <div class="text-center mb-4">
+            <h1 class="display-6">Cadastrar usuário</h1>
+        </div>
+        <form asp-controller="Usuario" asp-action="Criar" method="post">
+            <div class="form-group mb-3">
+                <label class="form-label">Nome</label>
+                <input asp-for="Nome" class="form-control" placeholder="Digite o nome do usuário" />
+                <span class="text-danger">@Html.ValidationMessageFor(x => x.Nome)</span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="form-label">E-mail</label>
+                <input asp-for="Email" class="form-control" placeholder="Informe o e-mail do usuário" />
+                <span class="text-danger">@Html.ValidationMessageFor(x => x.Email)</span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="form-label">Login</label>
+                <input asp-for="Login" class="form-control" placeholder="Informe o login do usuário" />
+                <span class="text-danger">@Html.ValidationMessageFor(x => x.Login)</span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="form-label">Perfil</label>
+                <select asp-for="Perfil" class="form-control">
+                    <option value="">Selecione</option>
+                    <option value="@PerfilEnum.Administrador">Administrador</option>
+                    <option value="@PerfilEnum.Padrao">Padrão</option>
+                </select>
+                <span class="text-danger">@Html.ValidationMessageFor(x => x.Perfil)</span>
+            </div>
+
+            <div class="form-group mb-4">
+                <label class="form-label">Senha</label>
+                <input type="password" asp-for="Senha" class="form-control" placeholder="Informe a senha do usuário" />
+                <span class="text-danger">@Html.ValidationMessageFor(x => x.Senha)</span>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Adicionar</button>
+            <a asp-controller="Usuario" asp-action="Index" class="btn btn-secondary w-100 mt-2">Voltar</a>
+        </form>
+    </div>
 </div>
+@section Scripts {
+    <style>
 
-<form asp-controller="Usuario" asp-action="Criar" method="post">
+        body {
+            overflow: hidden;
+        }
 
-    <div class="form-group">
-        <label for="nome" class="form-label">Nome</label>
-        <input type="text" asp-for="Nome" class="form-control" placeholder="Digite o nome do usuário">
-        @Html.ValidationMessageFor(x => x.Nome)
-    </div>
-    <div class="form-group">
-        <label for="email" class="form-label">E-mail</label>
-        <input type="text" asp-for="Email" class="form-control" placeholder="Informe o e-mail do usuário">
-        @Html.ValidationMessageFor(x => x.Email)
-    </div>
-    <div class="form-group">
-        <label for="login" class="form-label">Login</label>
-        <input type="text" asp-for="Login" class="form-control" placeholder="Informe o loging do usuário">
-        @Html.ValidationMessageFor(x => x.Login)
-    </div>
-    <div class="form-group">
-        <label for="perfil" class="form-label">Perfil</label>
-        <select asp-for="Perfil" class="form-control">
-            <option value="">Selecione</option>
-            <option value="@PerfilEnum.Admin">Admin</option>
-            <option value="@PerfilEnum.Padrao">Padrão</option>
-        </select>
-        @Html.ValidationMessageFor(x => x.Perfil)
-    </div>
-    <div class="form-group">
-        <label for="senha" class="form-label">Senha</label>
-        <input type="password" asp-for="Senha" class="form-control" placeholder="Informe a senha do usuário">
-        @Html.ValidationMessageFor(x => x.Senha)
-    </div>
-    <br />
-
-    <button type="submit" class="btn btn-primary w-100">Adicionar</button>
-    <a class="btn btn-secondary w-100" asp-controller="Usuario" asp-action="Index" role="button" style="margin-top: 5px;">Voltar</a>
-</form>
+        .container {
+            margin-top: 50px; /* Ajuste da margem superior para mover o formulário para cima */
+        }
+    </style>
+}

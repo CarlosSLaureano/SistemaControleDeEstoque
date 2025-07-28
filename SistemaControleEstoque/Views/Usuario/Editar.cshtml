@@ -1,50 +1,65 @@
 ﻿@using SistemaControleEstoque.Enums
 @model UsuarioModel
+
 @{
     ViewData["Title"] = "Editar usuário";
 }
 
-<div class="text-center">
+@section BackgroundImage {
+    <div class="usuario-background-image"></div>
+}
 
-    <h1 class="display-4">Editar usuário</h1>
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+    <div class="usuario-box p-4 rounded shadow" style="max-width: 600px; width: 100%;">
+        <div class="text-center mb-4">
+            <h1 class="display-6">Editar usuário</h1>
+        </div>
 
+        <form asp-controller="Usuario" asp-action="Editar" method="post">
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" asp-for="Nome" class="form-control" placeholder="Digite o nome do usuário">
+                @Html.ValidationMessageFor(x => x.Nome)
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="email" class="form-label">E-mail</label>
+                <input type="text" asp-for="Email" class="form-control" placeholder="Digite o e-mail do usuário">
+                @Html.ValidationMessageFor(x => x.Email)
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="login" class="form-label">Login</label>
+                <input type="text" asp-for="Login" class="form-control" placeholder="Digite o login do usuário">
+                @Html.ValidationMessageFor(x => x.Login)
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="perfil" class="form-label">Perfil</label>
+                <select asp-for="Perfil" class="form-control">
+                    <option value="">Selecione</option>
+                    <option value="@PerfilEnum.Administrador">Administrador</option>
+                    <option value="@PerfilEnum.Padrao">Padrão</option>
+                </select>
+                @Html.ValidationMessageFor(x => x.Perfil)
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Editar</button>
+            <a class="btn btn-secondary w-100 mt-2" asp-controller="Usuario" asp-action="Index">Voltar</a>
+        </form>
+    </div>
 </div>
+@section Scripts {
+    <style>
 
-<form asp-controller="Usuario" asp-action="Editar" method="post">
+        body {
+            overflow: hidden;
+        }
 
-    <input type="hidden" asp-for="Id" />
-    <div class="form-group">
-        <label for="nome" class="form-label">Nome</label>
-        <input type="text" asp-for="Nome" class="form-control" placeholder="Digite o nome do usuário">
-        @Html.ValidationMessageFor(x => x.Nome)
-    </div>
-
-    <div class="form-group">
-        <label for="email" class="form-label">E-mail</label>
-        <input type="text" asp-for="Email" class="form-control" placeholder="Digite o e-mail do usuário">
-        @Html.ValidationMessageFor(x => x.Email)
-    </div>
-
-    <div class="form-group">
-        <label for="login" class="form-label">Login</label>
-        <input type="text" asp-for="Login" class="form-control" placeholder="Digite o login do usuário">
-        @Html.ValidationMessageFor(x => x.Login)
-    </div>
-
-    <div class="form-group">
-        <label for="perfil" class="form-label">Perfil</label>
-        <select asp-for="Perfil" class="form-control" >
-            <option value="">Selecione</option>
-            <option value="@PerfilEnum.Admin" >Administrador</option>
-            <option value="@PerfilEnum.Padrao" >Padrão</option>
-        </select>
-        @Html.ValidationMessageFor(x => x.Perfil)
-    </div>
-   
-    
-    <br />
-
-    <button type="submit" class="btn btn-primary w-100">Editar</button>
-    <a class="btn btn-secondary w-100" asp-controller="Usuario" asp-action="Index" role="button" style="margin-top: 5px;">Voltar</a>
-</form>
-
+        .container {
+            margin-top: -80px; /* Ajuste da margem superior para mover o formulário para cima */
+        }
+    </style>
+}

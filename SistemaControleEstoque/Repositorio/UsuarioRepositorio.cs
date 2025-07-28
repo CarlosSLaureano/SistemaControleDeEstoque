@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SistemaControleEstoque.Data;
+﻿using SistemaControleEstoque.Data;
 using SistemaControleEstoque.Models;
 
 namespace SistemaControleEstoque.Repositorio
@@ -24,12 +23,10 @@ namespace SistemaControleEstoque.Repositorio
         public UsuarioModel ListarPorId(int id)
         {
             return _bancoContext.Usuarios.FirstOrDefault(x => x.Id == id);
-
         }
         public List<UsuarioModel> BuscarTodos()
-        { 
+        {
             return _bancoContext.Usuarios.ToList();
-
         }
         public UsuarioModel Adicionar(UsuarioModel usuario)
         {
@@ -51,11 +48,9 @@ namespace SistemaControleEstoque.Repositorio
             usuarioDB.Perfil = usuario.Perfil;
             usuarioDB.DataAtualizacao = DateTime.Now;
 
-
             _bancoContext.Usuarios.Update(usuarioDB);
             _bancoContext.SaveChanges();
             return usuarioDB;
-
         }
 
         public UsuarioModel AlterarSenha(AlterarSenhaModel alterarSenhaModel)
@@ -85,10 +80,6 @@ namespace SistemaControleEstoque.Repositorio
             _bancoContext.Usuarios.Remove(usuarioDB);
             _bancoContext.SaveChanges();
             return true;
-
         }
-
-       
     }
 }
-

@@ -12,7 +12,7 @@ namespace SistemaControleEstoque.Models
 
         public DateTime? DataAtualizacao { get; set; }
 
-       
-        
+
+
     }
 }

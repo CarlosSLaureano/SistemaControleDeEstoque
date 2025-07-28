@@ -1,0 +1,57 @@
+﻿@model ClienteModel
+@{
+    ViewData["Title"] = "Cadastrar cliente";
+}
+
+@section BackgroundImage {
+    <div class="cadastrar-background-image"></div>
+}
+
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+    <div class="produto-box p-4 rounded shadow" style="max-width: 500px; width: 100%;">
+        <div class="text-center mb-4">
+            <h1 class="display-6">Cadastrar cliente</h1>
+        </div>
+
+        <form asp-controller="Cliente" asp-action="Criar" method="post">
+            <div class="form-group mb-3">
+                <label for="Nome" class="form-label">Nome</label>
+                <input type="text" asp-for="Nome" class="form-control" placeholder="Digite o nome do cliente" />
+                @Html.ValidationMessageFor(x => x.Nome)
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="Telefone" class="form-label">Telefone</label>
+                <input type="text" asp-for="Telefone" class="form-control" placeholder="Informe o telefone do cliente" />
+                @Html.ValidationMessageFor(x => x.Telefone)
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="DataNascimento" class="form-label">Data de Nascimento</label>
+                <input type="date" asp-for="DataNascimento" class="form-control" />
+                @Html.ValidationMessageFor(x => x.DataNascimento)
+            </div>
+
+            <div class="form-group mb-4">
+                <label for="Email" class="form-label">Email</label>
+                <input type="email" asp-for="Email" class="form-control" placeholder="Informe o email do cliente" />
+                @Html.ValidationMessageFor(x => x.Email)
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Adicionar</button>
+            <a class="btn btn-secondary w-100 mt-2" asp-controller="Cliente" asp-action="Index" role="button">Voltar</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <style>
+        body {
+            overflow: hidden;
+        }
+
+        .container {
+            margin-top: -80px; /* Ajuste da margem superior para mover o formulário para cima */
+        }
+    </style>
+}

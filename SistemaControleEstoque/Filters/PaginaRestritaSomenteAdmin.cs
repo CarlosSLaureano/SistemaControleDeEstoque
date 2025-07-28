@@ -13,7 +13,7 @@ namespace SistemaControleEstoque.Filters
 
             if (string.IsNullOrEmpty(sessaoUsuario))
             {
-                context.Result = new RedirectToRouteResult(new RouteValueDictionary { {"controller", "Login"}, {"action", "Index"} });
+                context.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Login" }, { "action", "Index" } });
             }
             else
             {
@@ -24,7 +24,7 @@ namespace SistemaControleEstoque.Filters
                     context.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Login" }, { "action", "Index" } });
                 }
 
-                if(usuario.Perfil != Enums.PerfilEnum.Admin)
+                if (usuario.Perfil != Enums.PerfilEnum.Administrador)
                 {
                     context.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Restrito" }, { "action", "Index" } });
                 }

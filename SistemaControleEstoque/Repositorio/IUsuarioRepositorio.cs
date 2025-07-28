@@ -7,11 +7,10 @@ namespace SistemaControleEstoque.Repositorio
         UsuarioModel BuscarPorLogin(string login);
         UsuarioModel BuscarPorEmailELogin(string email, string login);
         UsuarioModel ListarPorId(int id);
-        List<UsuarioModel> BuscarTodos();
+        List<UsuarioModel> BuscarTodos(); // já tem, usado para exportar
         UsuarioModel Adicionar(UsuarioModel usuario);
         UsuarioModel Atualizar(UsuarioModel usuario);
         UsuarioModel AlterarSenha(AlterarSenhaModel alterarSenhaModel);
         bool Apagar(int id);
     }
 }
-

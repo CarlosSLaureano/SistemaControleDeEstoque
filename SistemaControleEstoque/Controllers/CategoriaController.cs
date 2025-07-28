@@ -2,7 +2,6 @@
 using SistemaControleEstoque.Filters;
 using SistemaControleEstoque.Models;
 using SistemaControleEstoque.Repositorio;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SistemaControleEstoque.Controllers
 {
@@ -29,7 +28,7 @@ namespace SistemaControleEstoque.Controllers
         }
 
         public IActionResult Editar(int id)
-        {   
+        {
             CategoriaModel categoria = _categoriaRepositorio.ListarPorId(id);
             return View(categoria);
         }
@@ -38,7 +37,7 @@ namespace SistemaControleEstoque.Controllers
         {
             CategoriaModel categoria = _categoriaRepositorio.ListarPorId(id);
             return View(categoria);
-            
+
         }
 
         public IActionResult Apagar(int id)
@@ -56,7 +55,7 @@ namespace SistemaControleEstoque.Controllers
                     TempData["MensagemErro"] = "Ops, erro na deleção da categoria!";
                 }
 
-                
+
                 return RedirectToAction("Index");
             }
             catch (System.Exception erro)
@@ -86,7 +85,7 @@ namespace SistemaControleEstoque.Controllers
                 TempData["MensagemErro"] = $"Ops, erro no cadastro da categoria, tente novamente, detalhe do erro: {erro.Message}!";
                 return RedirectToAction("Index");
             }
-           
+
         }
 
         [HttpPost]

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Dev\\SistemaControleEstoque\\SistemaControleEstoque\\SistemaControleEstoque.csproj": {}
+    "C:\\Dev\\SistemaControleDeEstoque\\SistemaControleEstoque\\SistemaControleEstoque.csproj": {}
   },
   "projects": {
-    "C:\\Dev\\SistemaControleEstoque\\SistemaControleEstoque\\SistemaControleEstoque.csproj": {
+    "C:\\Dev\\SistemaControleDeEstoque\\SistemaControleEstoque\\SistemaControleEstoque.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Dev\\SistemaControleEstoque\\SistemaControleEstoque\\SistemaControleEstoque.csproj",
+        "projectUniqueName": "C:\\Dev\\SistemaControleDeEstoque\\SistemaControleEstoque\\SistemaControleEstoque.csproj",
         "projectName": "SistemaControleEstoque",
-        "projectPath": "C:\\Dev\\SistemaControleEstoque\\SistemaControleEstoque\\SistemaControleEstoque.csproj",
+        "projectPath": "C:\\Dev\\SistemaControleDeEstoque\\SistemaControleEstoque\\SistemaControleEstoque.csproj",
         "packagesPath": "C:\\Users\\carlo\\.nuget\\packages\\",
-        "outputPath": "C:\\Dev\\SistemaControleEstoque\\SistemaControleEstoque\\obj\\",
+        "outputPath": "C:\\Dev\\SistemaControleDeEstoque\\SistemaControleEstoque\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -45,12 +45,20 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            },
+            "ClosedXML": {
+              "target": "Package",
+              "version": "[0.105.0, )"
+            },
             "Microsoft.AspNetCore.Mvc.Razor.ViewCompilation": {
               "target": "Package",
               "version": "[2.3.0, )"
@@ -95,7 +103,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

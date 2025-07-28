@@ -13,7 +13,7 @@ namespace SistemaControleEstoque.Filters
 
             if (string.IsNullOrEmpty(sessaoUsuario))
             {
-                context.Result = new RedirectToRouteResult(new RouteValueDictionary { {"controller", "Login"}, {"action", "Index"} });
+                context.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Login" }, { "action", "Index" } });
             }
             else
             {

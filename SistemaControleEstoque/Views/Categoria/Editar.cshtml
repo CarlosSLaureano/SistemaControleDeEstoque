@@ -1,25 +1,40 @@
 ﻿@model CategoriaModel
+
 @{
     ViewData["Title"] = "Editar categoria";
 }
 
-<div class="text-center">
+@section BackgroundImage {
+    <div class="categoria-background-image"></div>
+}
 
-    <h1 class="display-4">Editar categoria</h1>
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+    <div class="categoria-box p-4 rounded shadow" style="max-width: 600px; width: 100%;">
+        <div class="text-center mb-4">
+            <h1 class="display-6">Editar categoria</h1>
+        </div>
 
-</div>
+        <form asp-controller="Categoria" asp-action="" method="post">
+            <div class="form-group mb-3">
+                <label asp-for="Nome" class="form-label">Nome</label>
+                <input asp-for="Nome" class="form-control" placeholder="Digite o nome da categoria" />
+                <span class="text-danger">@Html.ValidationMessageFor(x => x.Nome)</span>
+            </div>
 
-<form asp-controller="Categoria" asp-action="Alterar" method="post">
-
-    <input type="hidden" asp-for="Id"/>
-    <div class="form-group">
-        <label for="nome" class="form-label">Nome</label>
-        <input type="text" asp-for="Nome" class="form-control" placeholder="Digite o nome da categoria">
-        @Html.ValidationMessageFor(x => x.Nome)
+            <button type="submit" class="btn btn-primary w-100">Editar</button>
+            <a asp-controller="Categoria" asp-action="Index" class="btn btn-secondary w-100 mt-2">Voltar</a>
+        </form>
     </div>
-    <br />
+</div>
+@section Scripts {
+    <style>
 
-    <button type="submit" class="btn btn-primary w-100">Alterar</button>
-    <a class="btn btn-secondary w-100" asp-controller="Categoria" asp-action="Index" role="button" style="margin-top: 5px;">Voltar</a>
-</form>
+        body {
+            overflow: hidden;
+        }
 
+        .container {
+            margin-top: -80px; /* Ajuste da margem superior para mover o formulário para cima */
+        }
+    </style>
+}

@@ -3,10 +3,29 @@
     ViewData["Title"] = "Confirmação apagar o usuário";
 }
 
-<div class="text-center">
-    <h3>Realmente deseja apagar o usuário(@Model.Nome)?</h3>
+@section BackgroundImage {
+    <div class="usuario-background-image"></div>
+}
+
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+    <div class="usuario-box p-4 rounded shadow text-center" style="max-width: 500px; width: 100%;">
+        <h3>Realmente deseja apagar o usuário <strong>@Model.Nome</strong>?</h3>
+
+        <div class="mt-4">
+            <a class="btn btn-primary w-100 mb-2" asp-action="Index" asp-controller="Usuario" role="button">Cancelar exclusão</a>
+            <a class="btn btn-danger w-100" asp-action="Apagar" asp-controller="Usuario" asp-route-id="@Model.Id" role="button">Confirmar exclusão</a>
+        </div>
+    </div>
 </div>
+@section Scripts {
+    <style>
 
-<a class="btn btn-primary w-100" asp-action="Index" asp-controller="Usuario" role="button">Cancelar exclusão</a>
-<a class="btn btn-danger w-100" asp-action="Apagar" asp-controller="Usuario" asp-route-id="@Model.Id" role="button" style="margin-top: 5px;">Confirmar exclusão</a>
+        body {
+            overflow: hidden;
+        }
 
+        .container {
+            margin-top: -80px; /* Ajuste da margem superior para mover o formulário para cima */
+        }
+    </style>
+}

@@ -1,51 +1,50 @@
 ﻿@using SistemaControleEstoque.Enums
 @model AlterarSenhaModel
 @{
-    ViewData["Title"] = "Alterar senha do usuário";
+    ViewData["Title"] = "Alterar senha";
 }
 
-<div class="text-center">
-    <h1 class="display-4" style="margin-bottom: 5px;">Alterar senha do usuário</h1>
-</div>
-
-<br />
-
-@if (TempData["MensagemSucesso"] != null)
-{
-    <div class="alert alert-success d-flex justify-content-between align-items-center" role="alert">
-        @TempData["MensagemSucesso"]
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+@section BackgroundImage {
+    <div class="usuario-background-image"></div>
 }
 
-@if (TempData["MensagemErro"] != null)
-{
-    <div class="alert alert-danger d-flex justify-content-between align-items-center" role="alert">
-        @TempData["MensagemErro"]
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-}
+<div class="container mt-5">
+    <div class="usuario-box p-4" style="background-color: rgba(255, 255, 255, 0.85); max-width: 500px; margin: 0 auto;">
 
-<br />
+        <h1 class="display-6 text-center mt-4 mb-3 text-dark">Alterar senha</h1>
 
-<div class="container d-flex justify-content-center align-items-center" style="min-height: 90vh; margin-top: -150px;">
-    <div class="col-12 col-sm-10 col-md-8 col-lg-6 p-4 border rounded shadow">
+        @if (TempData["MensagemSucesso"] != null)
+        {
+            <div class="alert alert-success text-center" role="alert">
+                @TempData["MensagemSucesso"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        @if (TempData["MensagemErro"] != null)
+        {
+            <div class="alert alert-danger text-center" role="alert">
+                @TempData["MensagemErro"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
         <form asp-controller="AlterarSenha" asp-action="Alterar" method="post">
             <div class="form-group mb-3">
                 <label for="senhaAtual" class="form-label">Senha Atual</label>
-                <input type="password" asp-for="SenhaAtual" class="form-control" placeholder="Digite a senha atual do usuário">
+                <input type="password" asp-for="SenhaAtual" class="form-control" placeholder="Digite a senha atual do usuário" />
                 @Html.ValidationMessageFor(x => x.SenhaAtual)
             </div>
 
             <div class="form-group mb-3">
                 <label for="novaSenha" class="form-label">Nova Senha</label>
-                <input type="password" asp-for="NovaSenha" class="form-control" placeholder="Digite a nova senha do usuário">
+                <input type="password" asp-for="NovaSenha" class="form-control" placeholder="Digite a nova senha do usuário" />
                 @Html.ValidationMessageFor(x => x.NovaSenha)
             </div>
 
             <div class="form-group mb-3">
                 <label for="confirmarSenha" class="form-label">Confirmar Nova Senha</label>
-                <input type="password" asp-for="ConfirmarNovaSenha" class="form-control" placeholder="Digite a confirmação da nova senha do usuário">
+                <input type="password" asp-for="ConfirmarNovaSenha" class="form-control" placeholder="Confirme a nova senha do usuário" />
                 @Html.ValidationMessageFor(x => x.ConfirmarNovaSenha)
             </div>
 
@@ -54,7 +53,3 @@
         </form>
     </div>
 </div>
-
-
-
-

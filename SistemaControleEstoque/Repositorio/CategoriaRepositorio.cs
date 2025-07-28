@@ -5,7 +5,7 @@ namespace SistemaControleEstoque.Repositorio
 {
     public class CategoriaRepositorio : ICategoriaRepositorio
     {
-        private readonly  BancoContext _bancoContext;
+        private readonly BancoContext _bancoContext;
         public CategoriaRepositorio(BancoContext bancoContext)
         {
             _bancoContext = bancoContext;
@@ -19,7 +19,7 @@ namespace SistemaControleEstoque.Repositorio
         public List<CategoriaModel> BuscarTodos()
         {
             return _bancoContext.Categorias.ToList();
-            
+
         }
         public CategoriaModel Adicionar(CategoriaModel categoria)
         {

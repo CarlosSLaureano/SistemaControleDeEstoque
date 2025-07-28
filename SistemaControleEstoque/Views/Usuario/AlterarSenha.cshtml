@@ -1,0 +1,20 @@
+﻿@model SistemaControleEstoque.Models.UsuarioModel
+@{
+    ViewData["Title"] = "Alterar Senha";
+}
+
+<div class="container mt-5">
+    <h2>Alterar Senha para: @Model.Nome</h2>
+
+    <form asp-action="AlterarSenha" method="post">
+        <input type="hidden" name="id" value="@Model.Id" />
+
+        <div class="form-group">
+            <label>Nova Senha</label>
+            <input type="password" name="novaSenha" class="form-control" required />
+        </div>
+
+        <button type="submit" class="btn btn-success mt-2">Salvar</button>
+        <a asp-action="Index" class="btn btn-secondary mt-2">Cancelar</a>
+    </form>
+</div>

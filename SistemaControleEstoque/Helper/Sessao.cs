@@ -7,7 +7,7 @@ namespace SistemaControleEstoque.Helper
     {
         private readonly IHttpContextAccessor _httpContext;
 
-        public Sessao(IHttpContextAccessor  httpContext)
+        public Sessao(IHttpContextAccessor httpContext)
         {
             _httpContext = httpContext;
         }

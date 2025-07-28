@@ -9,8 +9,8 @@ namespace SistemaControleEstoque.Repositorio
         CategoriaModel Adicionar(CategoriaModel categoria);
         CategoriaModel Atualizar(CategoriaModel categoria);
         bool Apagar(int id);
-        
-        
-        
+
+
+
     }
 }

@@ -1,3 +1,4 @@
+
 using Microsoft.EntityFrameworkCore;
 using SistemaControleEstoque.Data;
 using SistemaControleEstoque.Helper;
@@ -11,19 +12,29 @@ namespace SistemaControleEstoque
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Adiciona suporte a user-secrets (útil para dev)
+            builder.Configuration.AddUserSecrets<Program>(optional: true);
+
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddEndpointsApiExplorer()
-                   .AddDbContext<BancoContext>(options => options
-                   .UseSqlServer(builder.Configuration.GetConnectionString("DataBase")));
+
+            // Corrigido: AddDbContext separado do AddEndpointsApiExplorer
+            builder.Services.AddEndpointsApiExplorer();
+
+            builder.Services.AddDbContext<BancoContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase"))
+            );
 
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             builder.Services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
             builder.Services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
             builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+            builder.Services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
             builder.Services.AddScoped<ISessao, Sessao>();
-            builder.Services.AddScoped<IEmail, Email>();
+            
+            builder.Services.AddScoped<IActivityLogger, ActivityLogger>();
 
             builder.Services.AddSession(o =>
             {
@@ -38,13 +49,15 @@ namespace SistemaControleEstoque
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
             app.UseStaticFiles();
 
             app.UseRouting();
 
-            app.UseAuthorization();
-
+            // UseSession deve estar antes de UseAuthorization para funcionar corretamente
             app.UseSession();
+
+            app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",

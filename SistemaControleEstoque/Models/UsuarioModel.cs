@@ -7,7 +7,7 @@ namespace SistemaControleEstoque.Models
     public class UsuarioModel
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "Digite o nome do usuário")] 
+        [Required(ErrorMessage = "Digite o nome do usuário")]
         public string? Nome { get; set; }
 
         [Required(ErrorMessage = "Informe o login do usuário")]
@@ -28,8 +28,9 @@ namespace SistemaControleEstoque.Models
 
         public bool SenhaValida(string senha)
         {
-            return Senha == senha.GerarHash();
+            return Senha == Criptografia.GerarHash(senha);
         }
+
 
         public void SetSenhaHash()
         {
