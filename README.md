@@ -4,6 +4,7 @@ Este projeto é um sistema de controle de estoque em desenvolvimento com **.NET 
 
 ## 🔑 Funcionalidades
 📦 Gerenciamento inteligente de estoque – Adicione, edite e remova categorias e produtos com facilidade.
+
 👥 Cadastro de clientes – Inclui número de WhatsApp clicável para contato direto.
 🗃️ Listagem e exportação em Excel – Produtos, clientes e registro de atividades podem ser exportados por período.
 📝 Registro de atividades (logs) – Cada ação é registrada e pode ser consultada e exportada somente pelo Admin.
