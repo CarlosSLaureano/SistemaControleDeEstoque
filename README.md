@@ -6,7 +6,7 @@ O sistema conta com um design **Premium (Nível Enterprise)**, com efeitos de *G
 
 ## 🔑 Funcionalidades
 - 📊 **Dashboard Interativo** – Painel de controle na página inicial com atalhos rápidos e resumo das principais métricas do sistema.
-- 📦 **Gerenciamento Inteligente de Estoque** – Adicione, edite e remova categorias, produtos e clientes com facilidade através de formulários dinâmicos.
+- 📦 **Gerenciamento Inteligente de Estoque** – Adicione, edite e remova produtos e clientes com facilidade através de formulários dinâmicos.
 - 👥 **Cadastro de Clientes** – Inclui número de WhatsApp clicável para contato direto.
 - 👤 **Controle de Usuários com Perfis** – Apenas administradores podem gerenciar usuários. O perfil padrão possui acessos restritos.
 - 🔑 **Redefinição de Senha Segura** – Permite recuperação e alteração de senhas (criptografadas via GerarHash) e admin pode redefinir senha de outros usuários.
