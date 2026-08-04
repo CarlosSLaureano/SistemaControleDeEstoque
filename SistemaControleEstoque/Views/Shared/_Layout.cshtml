@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -9,34 +9,54 @@
     <link rel="stylesheet" href="~/SistemaControleEstoque.styles.css" asp-append-version="true" />
     <link href="https://cdn.datatables.net/v/dt/dt-2.2.2/datatables.min.css" rel="stylesheet" integrity="sha384-2vMryTPZxTZDZ3GnMBDVQV8OtmoutdrfJxnDTg0bVam9mZhi7Zr3J1+lkVFRr71f" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <!-- SweetAlert2 -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
 
 </head>
 <body>
-    @RenderSection("BackgroundImage", required: false) <!-- ✅ Aqui renderiza a imagem se existir -->
+    <div class="global-background"></div>
 
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                @await Component.InvokeAsync("Menu")
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <div class="sidebar-heading">
+                <i class="fas fa-boxes"></i> <span class="menu-text">Gestor360</span>
             </div>
-        </nav>
-    </header>
+            @await Component.InvokeAsync("Menu")
+        </div>
+        <!-- /#sidebar-wrapper -->
 
-    <div class="container">
-        <main role="main" class="pb-3">
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <!-- Botão Hamburguer para Mobile -->
+            <button class="btn btn-primary menu-toggle-btn" id="menu-toggle">
+                <i class="fas fa-bars"></i> Menu
+            </button>
+            
             @RenderBody()
-        </main>
+            
+            <footer class="mt-auto pt-5 pb-3 text-center" style="color: #64748b; font-size: 0.9rem; width: 100%;">
+                &copy; 2025 - Gestor360 <br />
+                <small>Desenvolvido por <strong>CL Soluções Tecnológicas</strong></small>
+            </footer>
+        </div>
+        <!-- /#page-content-wrapper -->
     </div>
-
-    <footer class="footer-fixo-esquerda">
-        &copy; 2025 - Gestor360
-    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/v/dt/dt-2.2.2/datatables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        document.getElementById("menu-toggle").addEventListener("click", function(e) {
+            e.preventDefault();
+            document.getElementById("wrapper").classList.toggle("toggled");
+        });
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+
 

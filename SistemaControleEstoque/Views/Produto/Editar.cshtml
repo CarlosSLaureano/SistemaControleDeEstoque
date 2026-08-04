@@ -1,48 +1,70 @@
-﻿@model ProdutoModel
+@model ProdutoModel
 @{
     ViewData["Title"] = "Editar produto";
 }
 
-@section BackgroundImage {
-    <div class="produto-background-image"></div>
-}
+
 
 <div class="d-flex justify-content-center align-items-center min-vh-100">
-    <div class="produto-box p-4 rounded shadow" style="max-width: 600px; width: 100%;">
+    <div class="glass-container p-4 rounded shadow" style="max-width: 600px; width: 100%;">
         <div class="text-center mb-4">
             <h1 class="display-6">Editar produto</h1>
         </div>
 
         <form asp-controller="Produto" asp-action="Alterar" method="post">
-            @Html.AntiForgeryToken()
             <input type="hidden" asp-for="Id" />
-
-            <div class="form-group mb-3">
-                <label class="form-label">Nome</label>
-                <input type="text" asp-for="Nome" class="form-control" placeholder="Digite o nome do produto" />
-                @Html.ValidationMessageFor(x => x.Nome)
+            <div class="mb-4">
+                <label for="nome" class="form-label text-muted fw-bold ms-1 mb-1">Nome do Produto</label>
+                <div class="input-group input-group-lg shadow-sm">
+                    <span class="input-group-text bg-white border-end-0 text-muted" style="border-radius: 10px 0 0 10px;">
+                        <i class="fas fa-box-open ms-2"></i>
+                    </span>
+                    <input type="text" asp-for="Nome" class="form-control border-start-0 ps-2" placeholder="Digite o nome do produto" style="border-radius: 0 10px 10px 0; font-size: 1rem; background-color: white !important;">
+                </div>
+                <div class="text-danger mt-1" style="font-size: 0.85rem;">@Html.ValidationMessageFor(x => x.Nome)</div>
             </div>
 
-            <div class="form-group mb-3">
-                <label class="form-label">Descrição</label>
-                <input type="text" asp-for="Descricao" class="form-control" placeholder="Informe a descrição do produto" />
-                @Html.ValidationMessageFor(x => x.Descricao)
+            <div class="mb-4">
+                <label for="descricao" class="form-label text-muted fw-bold ms-1 mb-1">Descrição</label>
+                <div class="input-group input-group-lg shadow-sm">
+                    <span class="input-group-text bg-white border-end-0 text-muted" style="border-radius: 10px 0 0 10px;">
+                        <i class="fas fa-align-left ms-2"></i>
+                    </span>
+                    <input type="text" asp-for="Descricao" class="form-control border-start-0 ps-2" placeholder="Informe a descrição" style="border-radius: 0 10px 10px 0; font-size: 1rem; background-color: white !important;">
+                </div>
+                <div class="text-danger mt-1" style="font-size: 0.85rem;">@Html.ValidationMessageFor(x => x.Descricao)</div>
             </div>
 
-            <div class="form-group mb-3">
-                <label class="form-label">Preço</label>
-                <input type="number" step="0.01" asp-for="Preco" class="form-control" placeholder="Informe o preço do produto" />
-                @Html.ValidationMessageFor(x => x.Preco)
+            <div class="mb-4">
+                <label for="preco" class="form-label text-muted fw-bold ms-1 mb-1">Preço (R$)</label>
+                <div class="input-group input-group-lg shadow-sm">
+                    <span class="input-group-text bg-white border-end-0 text-muted" style="border-radius: 10px 0 0 10px;">
+                        <i class="fas fa-dollar-sign ms-2"></i>
+                    </span>
+                    <input type="number" step="0.01" asp-for="Preco" class="form-control border-start-0 ps-2" placeholder="0,00" style="border-radius: 0 10px 10px 0; font-size: 1rem; background-color: white !important;">
+                </div>
+                <div class="text-danger mt-1" style="font-size: 0.85rem;">@Html.ValidationMessageFor(x => x.Preco)</div>
             </div>
 
-            <div class="form-group mb-3">
-                <label class="form-label">Quantidade</label>
-                <input type="number" asp-for="Quantidade" class="form-control" placeholder="Informe a quantidade do produto" />
-                @Html.ValidationMessageFor(x => x.Quantidade)
+            <div class="mb-5">
+                <label for="quantidade" class="form-label text-muted fw-bold ms-1 mb-1">Quantidade em Estoque</label>
+                <div class="input-group input-group-lg shadow-sm">
+                    <span class="input-group-text bg-white border-end-0 text-muted" style="border-radius: 10px 0 0 10px;">
+                        <i class="fas fa-layer-group ms-2"></i>
+                    </span>
+                    <input type="number" asp-for="Quantidade" class="form-control border-start-0 ps-2" placeholder="0" style="border-radius: 0 10px 10px 0; font-size: 1rem; background-color: white !important;">
+                </div>
+                <div class="text-danger mt-1" style="font-size: 0.85rem;">@Html.ValidationMessageFor(x => x.Quantidade)</div>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100">Alterar</button>
-            <a class="btn btn-secondary w-100 mt-2" asp-controller="Produto" asp-action="Index">Voltar</a>
+            <div class="d-flex gap-2">
+                <a class="btn btn-secondary btn-lg rounded-pill shadow-sm w-50" asp-controller="Produto" asp-action="Index">
+                    <i class="fas fa-arrow-left me-2"></i> Voltar
+                </a>
+                <button type="submit" class="btn btn-primary btn-lg rounded-pill shadow-sm w-50">
+                    <i class="fas fa-check me-2"></i> Salvar Alterações
+                </button>
+            </div>
         </form>
     </div>
 </div>
@@ -58,3 +80,4 @@
         }
     </style>
 }
+

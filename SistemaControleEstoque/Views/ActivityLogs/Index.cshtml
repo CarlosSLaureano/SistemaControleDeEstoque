@@ -9,9 +9,9 @@
     string dataFim = Context.Request.Query["dataFim"];
 }
 
-<div class="container mt-5">
+<div class="container mt-5 glass-container">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="mb-0 text-dark">📋 Registro de Atividades</h2>
+        <h2 class="mb-0 text-dark"><i class="fas fa-clipboard-list"></i> Registro de Atividades</h2>
 
         @if (tipoUsuario.Equals("Administrador", StringComparison.OrdinalIgnoreCase))
         {
@@ -45,8 +45,8 @@
     @if (Model != null && Model.Any())
     {
         <div class="table-responsive">
-            <table class="table table-bordered table-striped">
-                <thead class="table-dark">
+            <table class="table ">
+                <thead class="">
                     <tr>
                         <th>Usuário</th>
                         <th>Ação</th>
@@ -79,4 +79,7 @@
         </div>
     }
 </div>
+
+
+
 

@@ -41,3 +41,21 @@ function getDatatable(id) {
 $('.close-alert').click(function () {
     $('.alert').hide('hide');
 });
+
+
+function confirmDelete(url, itemName) {
+    Swal.fire({
+        title: 'Você tem certeza?',
+        text: "Realmente deseja apagar " + (itemName || "este item") + "?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#ef4444',
+        cancelButtonColor: '#64748b',
+        confirmButtonText: 'Sim, apagar!',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = url;
+        }
+    });
+}

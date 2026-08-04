@@ -1,18 +1,30 @@
-﻿@{
+@{
     ViewData["Title"] = "Redefinir senha";
+    Layout = "_LayoutDeslogado";
 }
 
-<div class="container mt-5 text-center">
-    <h2>🔑 Redefinição de Senha</h2>
-    <p class="mt-4 fs-5">
-        Para redefinir sua senha, entre em contato com o administrador do sistema.
-    </p>
-    <p class="fs-6 text-muted">
-        WhatsApp:
-        <a href="https://wa.me/559999999998?text=Olá,%20preciso%20redefinir%20minha%20senha" target="_blank">
-            (11) 99999-99998
-        </a><br />
-        E-mail: <a href="mailto:suporte@sistemaestoque.com.br">suporte@sistemaestoque.com.br</a>
-    </p>
-    <a href="/Login/Index" class="btn btn-secondary mt-3">Voltar para o login</a>
+<div class="container d-flex justify-content-center align-items-center flex-grow-1">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5 p-5 rounded-4 shadow-lg glass-container text-center" style="backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.4);">
+        <i class="fas fa-key fa-3x mb-3" style="color: #003366;"></i>
+        <h2 class="fw-bold mb-3" style="color: #1e293b;">Redefinicão de Senha</h2>
+        <p class="fs-5 text-muted">
+            Para redefinir sua senha, entre em contato com o administrador do sistema.
+        </p>
+        <hr class="my-4" style="border-color: rgba(0,0,0,0.1);" />
+        <p class="fs-6 text-muted mb-1">
+            <i class="fab fa-whatsapp text-success me-1"></i> WhatsApp:
+            <a href="https://wa.me/559999999998?text=Ol%C3%A1,%20preciso%20redefinir%20minha%20senha" target="_blank" class="fw-bold text-decoration-none" style="color: #003366;">
+                (11) 99999-99998
+            </a>
+        </p>
+        <p class="fs-6 text-muted">
+            <i class="fas fa-envelope me-1" style="color: #003366;"></i> E-mail:
+            <a href="mailto:suporte@sistemaestoque.com.br" class="fw-bold text-decoration-none" style="color: #003366;">
+                suporte@sistemaestoque.com.br
+            </a>
+        </p>
+        <a href="/Login/Index" class="btn btn-lg w-100 rounded-pill shadow-sm fw-bold mt-3" style="background-color: #003366; border-color: #003366; color: white;">
+            <i class="fas fa-arrow-left me-2"></i>Voltar para o login
+        </a>
+    </div>
 </div>

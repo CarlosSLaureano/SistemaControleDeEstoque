@@ -1,4 +1,4 @@
-﻿@model LoginModel
+@model LoginModel
 @{
     Layout = "_LayoutDeslogado";
     ViewData["Title"] = "Login";
@@ -25,39 +25,56 @@
 }
 
 
-<div class="container d-flex justify-content-center align-items-center" style="min-height: 90vh; margin-top: -100px;">
-    <div class="col-12 col-sm-8 col-md-6 col-lg-4 p-3 border rounded shadow login-box">
+<div class="container d-flex justify-content-center align-items-center flex-grow-1">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-4 p-5 rounded-4 shadow-lg glass-container" style="backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.4);">
+        <div class="text-center mb-5">
+            <i class="fas fa-boxes fa-3x mb-3" style="color: #003366;"></i>
+            <h2 class="fw-bold" style="color: #1e293b; letter-spacing: -0.5px;">Gestor360</h2>
+            <p class="text-muted" style="font-size: 0.95rem;">Faça login para gerenciar seu estoque</p>
+        </div>
+
         <form asp-controller="Login" asp-action="Entrar" method="post" id="loginForm">
-            <div class="mb-2">
-                <label for="login" class="form-label">Login:</label>
-                <input type="text" asp-for="Login" class="form-control" id="login">
-                @Html.ValidationMessageFor(x => x.Login)
-            </div>
-            <div class="mb-2">
-                <label for="senha" class="form-label">Senha:</label>
-                <input type="password" asp-for="Senha" class="form-control" id="senha">
-                @Html.ValidationMessageFor(x => x.Senha)
+            <div class="mb-4">
+                <div class="input-group input-group-lg shadow-sm">
+                    <span class="input-group-text bg-white border-end-0 text-muted" style="border-radius: 10px 0 0 10px;">
+                        <i class="fas fa-user ms-2"></i>
+                    </span>
+                    <input type="text" asp-for="Login" class="form-control border-start-0 ps-2" id="login" placeholder="Usuário" style="border-radius: 0 10px 10px 0; font-size: 1rem; background-color: white !important;">
+                </div>
+                <div class="text-danger mt-1" style="font-size: 0.85rem;">
+                    @Html.ValidationMessageFor(x => x.Login)
+                </div>
             </div>
 
-            <p class="mb-3 text-center">
-                Esqueceu sua senha?<br>
-                <a asp-action="RedefinirSenha" asp-controller="Login" class="text-danger fw-bold" style="text-decoration: none;">Redefinir minha senha</a>
+            <div class="mb-4">
+                <div class="input-group input-group-lg shadow-sm">
+                    <span class="input-group-text bg-white border-end-0 text-muted" style="border-radius: 10px 0 0 10px;">
+                        <i class="fas fa-lock ms-2"></i>
+                    </span>
+                    <input type="password" asp-for="Senha" class="form-control border-start-0 ps-2" id="senha" placeholder="Senha" style="border-radius: 0 10px 10px 0; font-size: 1rem; background-color: white !important;">
+                </div>
+                <div class="text-danger mt-1" style="font-size: 0.85rem;">
+                    @Html.ValidationMessageFor(x => x.Senha)
+                </div>
+            </div>
+
+            <p class="mb-4 text-end">
+                <a asp-action="RedefinirSenha" asp-controller="Login" class="text-decoration-none" style="color: #003366; font-size: 0.9rem; font-weight: 500;">
+                    Esqueceu sua senha?
+                </a>
             </p>
 
-            <button type="submit" class="btn btn-primary w-100" id="btnLogin">Entrar</button>
+            <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill shadow-sm fw-bold d-flex align-items-center justify-content-center gap-2" id="btnLogin" style="background-color: #003366; border-color: #003366; transition: all 0.3s ease; height: 52px;">
+                <span id="btnLoginText">Entrar no Sistema</span>
+                <span id="btnLoginSpinner" class="d-none">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Aguarde...
+                </span>
+            </button>
         </form>
     </div>
 </div>
 
-<!-- Spinner de carregamento (invisível até envio do formulário) -->
-<div id="loadingSpinner" class="d-none position-fixed top-0 start-0 w-100 h-100 bg-white bg-opacity-75 d-flex justify-content-center align-items-center" style="z-index: 9999;">
-    <div class="text-center">
-        <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Carregando...</span>
-        </div>
-        <p class="mt-2 fw-bold text-primary">Aguarde...</p>
-    </div>
-</div>
 
 @section Scripts {
     <style>
@@ -65,21 +82,27 @@
         body {
             overflow: hidden;
         }
+        #btnLogin:disabled {
+            opacity: 0.85;
+            cursor: not-allowed;
+        }
     </style>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById('loginForm');
-            const spinner = document.getElementById('loadingSpinner');
             const loginButton = document.getElementById('btnLogin');
+            const btnText = document.getElementById('btnLoginText');
+            const btnSpinner = document.getElementById('btnLoginSpinner');
 
             form.addEventListener('submit', function () {
-                // Exibe spinner
-                spinner.classList.remove('d-none');
-                // Desabilita botão
+                // Esconde texto, mostra spinner inline
+                btnText.classList.add('d-none');
+                btnSpinner.classList.remove('d-none');
+                // Desabilita botao
                 loginButton.disabled = true;
-                loginButton.innerText = 'Aguarde...';
             });
         });
     </script>
 }
+

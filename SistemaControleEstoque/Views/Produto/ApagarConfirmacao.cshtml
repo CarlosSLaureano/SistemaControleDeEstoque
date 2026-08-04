@@ -3,12 +3,10 @@
     ViewData["Title"] = "Confirmação apagar o produto";
 }
 
-@section BackgroundImage {
-    <div class="produto-background-image"></div>
-}
+
 
 <div class="d-flex justify-content-center align-items-center min-vh-100">
-    <div class="produto-box p-4 rounded shadow text-center" style="max-width: 500px; width: 100%;">
+    <div class="glass-container p-4 rounded shadow text-center" style="max-width: 500px; width: 100%;">
         <h3 class="mb-4">Realmente deseja apagar o produto <strong>@Model.Nome</strong>?</h3>
 
         <a class="btn btn-primary w-100 mb-2" asp-action="Index" asp-controller="Produto" role="button">
@@ -31,3 +29,4 @@
         }
     </style>
 }
+

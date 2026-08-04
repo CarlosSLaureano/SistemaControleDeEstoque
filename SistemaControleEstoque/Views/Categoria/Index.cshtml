@@ -1,15 +1,13 @@
-﻿@model List<CategoriaModel>
+@model List<CategoriaModel>
 
 @{
     ViewData["Title"] = "Listagem de categorias";
 }
 
-@section BackgroundImage {
-    <div class="categoria-background-image"></div>
-}
+
 
 <div class="container mt-5">
-    <div class="categorias-wrapper">
+    <div class="glass-container">
         <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-3">
             <a class="btn btn-primary" role="button" asp-controller="Categoria" asp-action="Criar">Adicionar nova categoria</a>
         </div>
@@ -42,8 +40,8 @@
         </h1>
 
         <div class="table-responsive mt-3">
-            <table id="table-categorias" class="table table-striped table-hover">
-                <thead class="table-dark">
+            <table id="table-categorias" class="table table-hover">
+                <thead class="">
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Nome</th>
@@ -62,8 +60,12 @@
                                 <td>@categoria.DataCadastro</td>
                                 <td>
                                     <div class="d-flex justify-content-end gap-2">
-                                        <a role="button" class="btn btn-primary btn-sm" asp-route-id="@categoria.Id" asp-controller="Categoria" asp-action="Editar">Editar</a>
-                                        <a role="button" class="btn btn-danger btn-sm" asp-route-id="@categoria.Id" asp-controller="Categoria" asp-action="ApagarConfirmacao">Apagar</a>
+                                        <a class="btn btn-outline-primary btn-sm rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 35px; height: 35px;" title="Editar" asp-route-id="@categoria.Id" asp-controller="Categoria" asp-action="Editar">
+                                            <i class="fas fa-pen"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-outline-danger btn-sm rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 35px; height: 35px;" title="Apagar" onclick="confirmDelete('@Url.Action("Apagar", "Categoria", new { id = categoria.Id })', '@(categoria.Nome?.Replace("'", "\\'") ?? "")'); return false;">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
@@ -71,10 +73,23 @@
                     }
                     else
                     {
-                        <tr><td colspan="4" class="text-center">Nenhuma categoria encontrada</td></tr>
+                        <tr>
+                            <td colspan="4" class="text-center py-5">
+                                <div class="empty-state d-flex flex-column align-items-center">
+                                    <i class="fas fa-tags fa-4x text-muted mb-3" style="opacity: 0.3;"></i>
+                                    <h4 class="text-muted fw-bold">Nenhuma categoria encontrada</h4>
+                                    <p class="text-muted mb-4">Parece que você ainda não cadastrou nenhuma categoria.</p>
+                                    <a class="btn btn-primary shadow-sm rounded-pill px-4" asp-controller="Categoria" asp-action="Criar">
+                                        <i class="fas fa-plus me-2"></i> Cadastrar Primeira Categoria
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
                     }
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
+

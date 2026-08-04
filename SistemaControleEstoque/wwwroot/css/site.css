@@ -1,5 +1,9 @@
+ï»¿@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 html {
   font-size: 14px;
+  position: relative;
+  min-height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -8,291 +12,350 @@ html {
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 body {
   margin-bottom: 60px;
+  font-family: 'Inter', sans-serif;
+  color: #333;
 }
 
-.field-validation-error{
-    color:#ff0000;
+/* Fundo Global da Aplicacao */
+.global-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/images/ai.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  opacity: 0.6;
 }
 
-.close-alert{
-    position:absolute;
-    right:-10px;
-    top:-15px;
-    border-radius: 15px;
-    width:30px;
-    height:31px;
-
+/* Animacao de Entrada */
+@keyframes slideUpFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.btn-group {
-    right: +105px;
-    border-radius: 15px;
-    width: 30px;
-    height: 38px;
+/* Glassmorphism unificado PREMIUM */
+.glass-container {
+  background-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 35px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08), inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+  z-index: 1;
+  margin-bottom: 30px;
+  animation: slideUpFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Campos de Formulario em Glass */
+.form-control, .form-select {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 0.6rem 1rem;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: #fff;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+    outline: none;
+}
+
+/* Botoes Premium */
+.btn {
+    border-radius: 10px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    font-weight: 600;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
+}
+.btn-primary:hover {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+    color: white;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+}
+.btn-success:hover {
+    background: linear-gradient(135deg, #34d399, #10b981);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.25);
+    color: white;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+}
+.btn-danger:hover {
+    background: linear-gradient(135deg, #f87171, #ef4444);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(239, 68, 68, 0.25);
+    color: white;
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #64748b, #475569);
+    color: white;
+}
+.btn-secondary:hover {
+    background: linear-gradient(135deg, #94a3b8, #64748b);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(100, 116, 139, 0.25);
+    color: white;
+}
+
+/* Tabela Moderna Glass - Flutuante */
+.table-responsive {
+    border-radius: 16px;
+    overflow: hidden;
+    padding: 10px;
+    background: transparent;
 }
 
 .table {
-    text-align: left;
+  text-align: left;
+  margin-bottom: 0;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  background-color: transparent;
 }
 
-
-
-
-.top-left {
-    float: left;
+.table thead th {
+    background-color: #003366 !important;
+    color: #ffffff !important;
+    border-bottom: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    padding: 10px 15px;
 }
 
-.top-right {
-    float: right;
+.table tbody tr {
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
 }
 
-.bottom-left {
-    float: left;
-    margin-top: 10px;
+.table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 1);
+    transform: translateY(-3px) scale(1.005);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
-.bottom-right {
-    float: right;
-    margin-top: 10px;
+.table td {
+    border: none;
+    vertical-align: middle;
+    padding: 15px;
+    color: #1e293b;
 }
 
+.table td:first-child, .table th:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+.table td:last-child, .table th:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
 
-.alert {
+/* Utilitarios do sistema antigo mantidos */
+.field-validation-error { color: #ef4444; font-weight: 500; font-size: 0.9rem;}
+.close-alert { position: absolute; right: -10px; top: -15px; border-radius: 15px; width: 30px; height: 31px; }
+.btn-group { border-radius: 15px; }
+.top-left { float: left; }
+.top-right { float: right; }
+.bottom-left { float: left; margin-top: 10px; }
+.bottom-right { float: right; margin-top: 10px; }
+.alert { position: relative; border-radius: 12px; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+.btn-close { position: absolute; left: 10px; } 
+
+/* Estrutura extra */
+.content-wrapper { position: relative; z-index: 1; padding-bottom: 50px; }
+.form-page-wrapper { min-height: 90vh; }
+.footer-fixo-esquerda { position: fixed; bottom: 0; left: 0; padding: 5px 10px; color: black; background-color: transparent; text-align: left; z-index: 1030; font-weight: 500; }
+
+/* Layout Principal com Sidebar */
+#wrapper {
+    display: flex;
+    align-items: stretch;
+    min-height: 100vh;
+}
+
+#sidebar-wrapper {
+    overflow-x: hidden;
+    min-width: 85px;
+    max-width: 85px;
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-right: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 4px 0 25px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1000;
+}
+
+#page-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-width: 100vw;
+    width: 100%;
+    padding: 30px;
+    padding-bottom: 80px;
+}
+
+.sidebar-heading {
+    padding: 2rem 1.25rem;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #1e293b;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    text-align: center;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #1e293b, #334155);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.sidebar-glass {
+    padding-top: 20px;
+}
+
+.sidebar-glass .list-group-item {
+    white-space: nowrap;
+    overflow: hidden;
+    background: transparent;
+    border: none;
+    padding: 14px 20px;
+    font-weight: 600;
+    color: #64748b;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: 12px;
+    margin: 6px 16px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
     position: relative;
+    overflow: hidden;
 }
 
-.btn-close {
+.sidebar-glass .list-group-item:hover {
+    background-color: rgba(37, 99, 235, 0.08);
+    color: #2563eb;
+    transform: translateX(6px);
+}
+
+/* Indicador lateral no hover */
+.sidebar-glass .list-group-item::before {
+    content: '';
     position: absolute;
-    left: 10px; /* Ajuste conforme necessário */
-}
-
-
-.login-page .background-image {
-    position: fixed;
+    left: 0;
     top: 0;
-    left: 0;
-    width: 100%;
     height: 100%;
-    background-image: url('/images/ai.jpg'); /* Altere conforme necessário */
-    background-size: cover;
-    background-position: center;
-    z-index: 0;
-    opacity: 0.6;
+    width: 4px;
+    background: linear-gradient(to bottom, #3b82f6, #2563eb);
+    transform: scaleY(0);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: 0 4px 4px 0;
+}
+.sidebar-glass .list-group-item:hover::before {
+    transform: scaleY(1);
 }
 
-.content-wrapper {
-    position: relative;
-    z-index: 1;
+.sidebar-glass .list-group-item i {
+    margin-right: 14px;
+    font-size: 1.2rem;
+    width: 24px;
+    text-align: center;
+    transition: transform 0.2s;
 }
-
-.login-box {
-    background-color: rgba(255, 255, 255, 0.85); /* Leve transparência */
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    position: relative;
-    z-index: 1;
-}
-
-.home-background-image {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('/images/ai.jpg'); /* ajuste esse caminho */
-    background-size: cover;
-    background-position: center;
-    z-index: -1;
-    opacity: 0.6;
-}
-
-.categoria-box {
-    background-color: rgba(255, 255, 255, 0.85); /* Leve transparência */
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    z-index: 1;
-}
-.categoria-background-image {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('/images/ai.jpg'); /* ajuste esse caminho */
-    background-size: cover;
-    background-position: center;
-    z-index: -1;
-    opacity: 0.6;
-}
-
-.produto-box {
-    background-color: rgba(255, 255, 255, 0.85); /* Fundo branco com leve transparência */
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    z-index: 1;
+.sidebar-glass .list-group-item:hover i {
+    transform: scale(1.15);
 }
 
 
-.produto-background-image {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('/images/ai.jpg'); /* ajuste esse caminho */
-    background-size: cover;
-    background-position: center;
-    z-index: -1;
-    opacity: 0.6;
+#sidebar-wrapper:hover {
+    min-width: 270px;
+    max-width: 270px;
 }
 
-.usuario-box {
-    background-color: rgba(255, 255, 255, 0.85);
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    z-index: 1;
+.menu-text {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    white-space: nowrap;
 }
 
-.usuario-background-image {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('/images/ai.jpg'); /* ajuste esse caminho */
-    background-size: cover;
-    background-position: center;
-    z-index: -1;
-    opacity: 0.;
+#sidebar-wrapper:hover .menu-text {
+    opacity: 1;
+    transition: opacity 0.3s ease 0.15s;
 }
 
-.cadastrar-box {
-    background-color: rgba(255, 255, 255, 0.85); /* Fundo branco com leve transparência */
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    z-index: 1;
-}
-
-.cadastrar-background-image {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('/images/ai.jpg'); /* Substitua com o caminho real */
-    background-size: cover;
-    background-position: center;
-    z-index: -1;
-    opacity: 0.6; /* Transparência do fundo */
-}
-
-
-
-.form-page-wrapper {
-    min-height: 90vh;
-}
-
-.form-container {
-    background-color: rgba(255, 255, 255, 0.85);
-    padding: 2rem;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 600px;
-}
-
-.titulo-text {
-    color: black;
-    font-weight: 300; /* mais fino (light) */
-    font-size: 3rem; /* tamanho ajustável */
-    margin: 0;
-}
-
-.categorias-wrapper {
-    background-color: rgba(255, 255, 255, 0.8); /* fundo branco claro */
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-}
-
-.produtos-wrapper {
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.01);
-}
-
-.usuarios-wrapper {
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.01);
-}
-
-.usuario-background-image {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('/images/ai.jpg'); /* Substitua com o caminho real */
-    background-size: cover;
-    background-position: center;
-    z-index: -1;
-    opacity: 0.6; /* Transparência do fundo */
-}
-.content-wrapper {
-    padding-bottom: 50px; /* Altura aproximada do rodapé */
-}
-
-.footer-fixo-esquerda {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    padding: 5px 10px;
-    color: black;
-    background-color: transparent;
+#sidebar-wrapper .sidebar-heading {
     text-align: left;
-    z-index: 1030;
+    white-space: nowrap;
+}
+
+/* Responsividade */
+@media (min-width: 768px) {
+    #page-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+        min-width: 0;
+        width: 100%;
+    }
+}
+@media (max-width: 767.98px) {
+    #sidebar-wrapper {
+    overflow-x: hidden;
+        margin-left: -270px;
+        position: fixed;
+        height: 100vh;
+    }
+    #wrapper.toggled #sidebar-wrapper {
+    overflow-x: hidden;
+        margin-left: 0;
+    }
+}
+
+.menu-toggle-btn {
+    display: none;
+}
+@media (max-width: 767.98px) {
+    .menu-toggle-btn {
+        display: inline-block;
+        margin-bottom: 20px;
+        border-radius: 10px;
+    }
 }
 
 
-.editar-box {
-    background-color: rgba(255, 255, 255, 0.85); /* Fundo branco com leve transparência */
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    z-index: 1;
-}
 
-.clientes-wrapper {
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.01);
-}
-
-.cliente-background-image {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('/images/ai.jpg'); /* Substitua com o caminho real */
-    background-size: cover;
-    background-position: center;
-    z-index: -1;
-    opacity: 0.6; /* Transparência do fundo */
-}
 
