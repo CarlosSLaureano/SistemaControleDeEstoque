@@ -1,4 +1,4 @@
-﻿using ClosedXML.Excel;
+using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
 using SistemaControleEstoque.Filters;
 using SistemaControleEstoque.Helper;
@@ -187,6 +187,24 @@ namespace SistemaControleEstoque.Controllers
                         "Usuarios.xlsx");
                 }
             }
+        }
+
+        // EXPORTAÇÃO PARA PDF
+        public IActionResult ExportarParaPdf(DateTime? dataInicio, DateTime? dataFim)
+        {
+            var usuarios = _usuarioRepositorio.BuscarTodos();
+
+            if (dataInicio.HasValue)
+                usuarios = usuarios
+                    .FindAll(u => u.DataCadastro.HasValue && u.DataCadastro.Value.Date >= dataInicio.Value.Date);
+
+            if (dataFim.HasValue)
+                usuarios = usuarios
+                    .FindAll(u => u.DataCadastro.HasValue && u.DataCadastro.Value.Date <= dataFim.Value.Date);
+
+            var pdfBytes = SistemaControleEstoque.Helper.PdfReportHelper.GerarPdfUsuarios(usuarios, dataInicio, dataFim);
+
+            return File(pdfBytes, "application/pdf", $"Usuarios_{DateTime.Now:yyyyMMdd_HHmmss}.pdf");
         }
     }
 }

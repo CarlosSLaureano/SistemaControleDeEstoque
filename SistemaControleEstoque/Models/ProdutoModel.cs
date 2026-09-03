@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SistemaControleEstoque.Models
 {
@@ -22,8 +23,15 @@ namespace SistemaControleEstoque.Models
 
         public decimal? Total { get; set; }
 
+        // FK para Categoria (nullable para não quebrar produtos já cadastrados)
+        public int? CategoriaId { get; set; }
+
+        [ForeignKey("CategoriaId")]
+        public CategoriaModel? Categoria { get; set; }
+
         public DateTime? DataCadastro { get; set; }
         public DateTime? DataAtualizacao { get; set; }
     }
 }
+
 

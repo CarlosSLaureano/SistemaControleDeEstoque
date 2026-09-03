@@ -56,6 +56,19 @@
                 <div class="text-danger mt-1" style="font-size: 0.85rem;">@Html.ValidationMessageFor(x => x.Quantidade)</div>
             </div>
 
+            <div class="mb-5">
+                <label for="CategoriaId" class="form-label text-muted fw-bold ms-1 mb-1">Categoria</label>
+                <div class="input-group input-group-lg shadow-sm">
+                    <span class="input-group-text bg-white border-end-0 text-muted" style="border-radius: 10px 0 0 10px;">
+                        <i class="fas fa-tag ms-2"></i>
+                    </span>
+                    <select asp-for="CategoriaId" asp-items="ViewBag.Categorias" class="form-select border-start-0" style="border-radius: 0 10px 10px 0; font-size: 1rem; background-color: white !important;">
+                        <option value="">-- Selecione uma categoria (opcional) --</option>
+                    </select>
+                </div>
+            </div>
+
+
             <div class="d-flex gap-2">
                 <a class="btn btn-secondary btn-lg rounded-pill shadow-sm w-50" asp-controller="Produto" asp-action="Index">
                     <i class="fas fa-arrow-left me-2"></i> Voltar

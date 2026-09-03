@@ -1,4 +1,5 @@
-﻿using SistemaControleEstoque.Data;
+using Microsoft.EntityFrameworkCore;
+using SistemaControleEstoque.Data;
 using SistemaControleEstoque.Models;
 
 namespace SistemaControleEstoque.Repositorio
@@ -14,12 +15,16 @@ namespace SistemaControleEstoque.Repositorio
 
         public ProdutoModel ListarPorId(int id)
         {
-            return _bancoContext.Produtos.FirstOrDefault(x => x.Id == id);
+            return _bancoContext.Produtos
+                .Include(p => p.Categoria)
+                .FirstOrDefault(x => x.Id == id);
         }
 
         public List<ProdutoModel> BuscarTodos()
         {
-            return _bancoContext.Produtos.ToList();
+            return _bancoContext.Produtos
+                .Include(p => p.Categoria)
+                .ToList();
         }
 
         public ProdutoModel Adicionar(ProdutoModel produto)
@@ -47,8 +52,9 @@ namespace SistemaControleEstoque.Repositorio
             // Atualiza os campos
             produtoDB.Nome = produto.Nome;
             produtoDB.Descricao = produto.Descricao;
-            produtoDB.Preco = produto.Preco; // <-- Atualiza o Preço
+            produtoDB.Preco = produto.Preco;
             produtoDB.Quantidade = produto.Quantidade;
+            produtoDB.CategoriaId = produto.CategoriaId;
             produtoDB.DataAtualizacao = DateTime.Now;
 
             // Atualiza o total com base nos valores

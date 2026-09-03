@@ -12,27 +12,32 @@
 
         <!-- Filtro por período -->
         <form method="get" asp-controller="Usuario" asp-action="Index" class="row g-3 mb-4 align-items-end">
-            <div class="col-md-3">
+            <div class="col-lg-2 col-md-6">
                 <label for="dataInicio" class="form-label">Data Início:</label>
                 <input type="date" id="dataInicio" name="dataInicio" value="@ViewBag.DataInicio" class="form-control" />
             </div>
-            <div class="col-md-3">
+            <div class="col-lg-2 col-md-6">
                 <label for="dataFim" class="form-label">Data Fim:</label>
                 <input type="date" id="dataFim" name="dataFim" value="@ViewBag.DataFim" class="form-control" />
             </div>
-            <div class="col-md-2 d-grid">
+            <div class="col-lg-2 col-md-3 d-grid">
                 <button type="submit" class="btn btn-primary">
                     <i class="fas fa-filter"></i> Filtrar
                 </button>
             </div>
-            <div class="col-md-2 d-grid">
+            <div class="col-lg-2 col-md-3 d-grid">
                 <a href="@Url.Action("Index", "Usuario")" class="btn btn-secondary">
                     <i class="fas fa-broom"></i> Limpar Filtros
                 </a>
             </div>
-            <div class="col-md-2 d-grid">
+            <div class="col-lg-2 col-md-3 d-grid">
                 <a href="@Url.Action("ExportarParaExcel", "Usuario", new { dataInicio = ViewBag.DataInicio, dataFim = ViewBag.DataFim })" class="btn btn-success">
                     <i class="fas fa-file-excel"></i> Exportar Excel
+                </a>
+            </div>
+            <div class="col-lg-2 col-md-3 d-grid">
+                <a href="@Url.Action("ExportarParaPdf", "Usuario", new { dataInicio = ViewBag.DataInicio, dataFim = ViewBag.DataFim })" class="btn btn-danger">
+                    <i class="fas fa-file-pdf"></i> Exportar PDF
                 </a>
             </div>
         </form>

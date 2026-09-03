@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SistemaControleEstoque.Models;
 
 namespace SistemaControleEstoque.Data
@@ -25,8 +25,16 @@ namespace SistemaControleEstoque.Data
             {
                 entity.Property(p => p.Preco).HasPrecision(18, 2);
                 entity.Property(p => p.Total).HasPrecision(18, 2);
+
+                // Relacionamento: Produto -> Categoria (opcional)
+                // Ao apagar uma categoria, o CategoriaId do produto vira null (não apaga o produto)
+                entity.HasOne(p => p.Categoria)
+                      .WithMany()
+                      .HasForeignKey(p => p.CategoriaId)
+                      .OnDelete(DeleteBehavior.SetNull);
             });
         }
     }
 }
+
 

@@ -1,4 +1,4 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
@@ -7,12 +7,14 @@ $(document).ready(function () {
     getDatatable('#table-categorias');
     getDatatable('#table-produtos');
     getDatatable('#table-usuarios');
-    getDatatable('#table-clientes')
+    getDatatable('#table-clientes');
+    getDatatable('#table-logs');
 });
 
 function getDatatable(id) {
+    if ($(id).length === 0) return;
     $(id).DataTable({
-        dom: '<"top-bar d-flex justify-content-between"<"top-left"l><"top-right"f>>rt<"bottom-bar d-flex justify-content-between"<"bottom-left"i><"bottom-right"p>>',
+        dom: '<"top-bar d-flex justify-content-between align-items-center mb-3"<"top-left"l><"top-right"f>>rt<"bottom-bar d-flex justify-content-between align-items-center mt-3"<"bottom-left"i><"bottom-right"p>>',
         ordering: true,
         paging: true,
         searching: true,
@@ -25,7 +27,8 @@ function getDatatable(id) {
             sLoadingRecords: "Carregando...",
             sProcessing: "Processando...",
             sZeroRecords: "Nenhum registro encontrado",
-            sSearch: "Pesquisar",
+            sSearch: "",
+            sSearchPlaceholder: "Pesquisar...",
             oPaginate: {
                 sNext: "Próximo",
                 sPrevious: "Anterior",

@@ -1,4 +1,4 @@
-﻿using ClosedXML.Excel;
+using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
 using SistemaControleEstoque.Filters;
 using SistemaControleEstoque.Models;
@@ -17,9 +17,19 @@ namespace SistemaControleEstoque.Controllers
         }
 
         // LISTAGEM
-        public IActionResult Index()
+        public IActionResult Index(DateTime? dataInicio, DateTime? dataFim)
         {
+            ViewBag.DataInicio = dataInicio?.ToString("yyyy-MM-dd");
+            ViewBag.DataFim = dataFim?.ToString("yyyy-MM-dd");
+
             List<ClienteModel> clientes = _clienteRepositorio.BuscarTodos();
+
+            if (dataInicio.HasValue)
+                clientes = clientes.FindAll(c => c.DataNascimento.HasValue && c.DataNascimento.Value.Date >= dataInicio.Value.Date);
+
+            if (dataFim.HasValue)
+                clientes = clientes.FindAll(c => c.DataNascimento.HasValue && c.DataNascimento.Value.Date <= dataFim.Value.Date);
+
             return View(clientes);
         }
 
@@ -45,10 +55,10 @@ namespace SistemaControleEstoque.Controllers
                 }
                 return View(cliente);
             }
-            catch (System.Exception ex)
+            catch (Exception erro)
             {
-                TempData["MensagemErro"] = $"Erro ao cadastrar cliente: {ex.Message}";
-                return View(cliente);
+                TempData["MensagemErro"] = $"Erro ao cadastrar cliente: {erro.Message}";
+                return RedirectToAction("Index");
             }
         }
 
@@ -56,10 +66,7 @@ namespace SistemaControleEstoque.Controllers
         [HttpGet]
         public IActionResult Editar(int id)
         {
-            var cliente = _clienteRepositorio.ListarPorId(id);
-            if (cliente == null)
-                return NotFound();
-
+            ClienteModel cliente = _clienteRepositorio.ListarPorId(id);
             return View(cliente);
         }
 
@@ -78,10 +85,10 @@ namespace SistemaControleEstoque.Controllers
                 }
                 return View(cliente);
             }
-            catch (System.Exception ex)
+            catch (Exception erro)
             {
-                TempData["MensagemErro"] = $"Erro ao atualizar cliente: {ex.Message}";
-                return View(cliente);
+                TempData["MensagemErro"] = $"Erro ao atualizar cliente: {erro.Message}";
+                return RedirectToAction("Index");
             }
         }
 
@@ -89,39 +96,44 @@ namespace SistemaControleEstoque.Controllers
         [HttpGet]
         public IActionResult ApagarConfirmacao(int id)
         {
-            var cliente = _clienteRepositorio.ListarPorId(id);
-            if (cliente == null)
-                return NotFound();
-
+            ClienteModel cliente = _clienteRepositorio.ListarPorId(id);
             return View(cliente);
         }
 
-        // POST: Cliente/Apagar/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        // GET: Cliente/Apagar/5
+        [HttpGet]
         public IActionResult Apagar(int id)
         {
             try
             {
                 bool apagado = _clienteRepositorio.Apagar(id);
                 if (apagado)
+                {
                     TempData["MensagemSucesso"] = "Cliente apagado com sucesso!";
+                }
                 else
-                    TempData["MensagemErro"] = "Erro ao apagar cliente.";
-
+                {
+                    TempData["MensagemErro"] = "Ops, não foi possível apagar o cliente.";
+                }
                 return RedirectToAction("Index");
             }
-            catch (System.Exception ex)
+            catch (Exception erro)
             {
-                TempData["MensagemErro"] = $"Erro ao apagar cliente: {ex.Message}";
+                TempData["MensagemErro"] = $"Ops, erro na deleção do cliente: {erro.Message}";
                 return RedirectToAction("Index");
             }
         }
 
         // EXPORTAR PARA EXCEL
-        public IActionResult ExportarParaExcel()
+        public IActionResult ExportarParaExcel(DateTime? dataInicio, DateTime? dataFim)
         {
             var clientes = _clienteRepositorio.BuscarTodos();
+
+            if (dataInicio.HasValue)
+                clientes = clientes.FindAll(c => c.DataNascimento.HasValue && c.DataNascimento.Value.Date >= dataInicio.Value.Date);
+
+            if (dataFim.HasValue)
+                clientes = clientes.FindAll(c => c.DataNascimento.HasValue && c.DataNascimento.Value.Date <= dataFim.Value.Date);
 
             using (var workbook = new XLWorkbook())
             {
@@ -157,6 +169,22 @@ namespace SistemaControleEstoque.Controllers
                         "Clientes.xlsx");
                 }
             }
+        }
+
+        // EXPORTAR PARA PDF
+        public IActionResult ExportarParaPdf(DateTime? dataInicio, DateTime? dataFim)
+        {
+            var clientes = _clienteRepositorio.BuscarTodos();
+
+            if (dataInicio.HasValue)
+                clientes = clientes.FindAll(c => c.DataNascimento.HasValue && c.DataNascimento.Value.Date >= dataInicio.Value.Date);
+
+            if (dataFim.HasValue)
+                clientes = clientes.FindAll(c => c.DataNascimento.HasValue && c.DataNascimento.Value.Date <= dataFim.Value.Date);
+
+            var pdfBytes = SistemaControleEstoque.Helper.PdfReportHelper.GerarPdfClientes(clientes, dataInicio, dataFim);
+
+            return File(pdfBytes, "application/pdf", $"Clientes_{DateTime.Now:yyyyMMdd_HHmmss}.pdf");
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model UsuarioModel
+@model UsuarioModel
 
 <div class="sidebar-glass">
     <div class="list-group list-group-flush">
@@ -9,6 +9,10 @@
 
         <a class="list-group-item list-group-item-action" asp-area="" asp-controller="Produto" asp-action="Index">
             <i class="fas fa-box"></i> <span class="menu-text">Produtos</span>
+        </a>
+
+        <a class="list-group-item list-group-item-action" asp-area="" asp-controller="Categoria" asp-action="Index">
+            <i class="fas fa-tags"></i> <span class="menu-text">Categorias</span>
         </a>
 
         <a class="list-group-item list-group-item-action" asp-area="" asp-controller="Cliente" asp-action="Index">

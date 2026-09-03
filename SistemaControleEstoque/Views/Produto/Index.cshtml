@@ -18,27 +18,32 @@
 
         <!-- Filtro por período -->
         <form method="get" asp-controller="Produto" asp-action="Index" class="row g-3 mb-4 align-items-end">
-            <div class="col-md-3">
+            <div class="col-lg-2 col-md-6">
                 <label for="dataInicio" class="form-label">Data Início:</label>
                 <input type="date" id="dataInicio" name="dataInicio" value="@ViewBag.DataInicio" class="form-control" />
             </div>
-            <div class="col-md-3">
+            <div class="col-lg-2 col-md-6">
                 <label for="dataFim" class="form-label">Data Fim:</label>
                 <input type="date" id="dataFim" name="dataFim" value="@ViewBag.DataFim" class="form-control" />
             </div>
-            <div class="col-md-2 d-grid">
+            <div class="col-lg-2 col-md-3 d-grid">
                 <button type="submit" class="btn btn-primary">
                     <i class="fas fa-filter"></i> Filtrar
                 </button>
             </div>
-            <div class="col-md-2 d-grid">
+            <div class="col-lg-2 col-md-3 d-grid">
                 <a href="@Url.Action("Index", "Produto")" class="btn btn-secondary">
                     <i class="fas fa-broom"></i> Limpar Filtros
                 </a>
             </div>
-            <div class="col-md-2 d-grid">
+            <div class="col-lg-2 col-md-3 d-grid">
                 <a href="@Url.Action("ExportarParaExcel", "Produto", new { dataInicio = ViewBag.DataInicio, dataFim = ViewBag.DataFim })" class="btn btn-success">
                     <i class="fas fa-file-excel"></i> Exportar Excel
+                </a>
+            </div>
+            <div class="col-lg-2 col-md-3 d-grid">
+                <a href="@Url.Action("ExportarParaPdf", "Produto", new { dataInicio = ViewBag.DataInicio, dataFim = ViewBag.DataFim })" class="btn btn-danger">
+                    <i class="fas fa-file-pdf"></i> Exportar PDF
                 </a>
             </div>
         </form>
@@ -81,6 +86,7 @@
                         <th>ID</th>
                         <th>Nome</th>
                         <th>Descrição</th>
+                        <th>Categoria</th>
                         <th class="text-start">Quantidade</th>
                         <th>Preço</th>
                         <th>Total (R$)</th>
@@ -97,6 +103,16 @@
                                 <th>@produto.Id</th>
                                 <td>@produto.Nome</td>
                                 <td>@produto.Descricao</td>
+                                <td>
+                                    @if (produto.Categoria != null)
+                                    {
+                                        <span class="badge" style="background-color: #003366; font-size: 0.8rem;">@produto.Categoria.Nome</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">—</span>
+                                    }
+                                </td>
                                 <td class="text-start">@produto.Quantidade</td>
                                 <td>@produto.Preco?.ToString("C")</td>
                                 <td>@(((produto.Preco ?? 0m) * (decimal)(produto.Quantidade ?? 0)).ToString("C"))</td>
@@ -117,7 +133,7 @@
                     else
                     {
                         <tr>
-                            <td colspan="8" class="text-center py-5">
+                            <td colspan="9" class="text-center py-5">
                                 <div class="empty-state d-flex flex-column align-items-center">
                                     <i class="fas fa-box-open fa-4x text-muted mb-3" style="opacity: 0.3;"></i>
                                     <h4 class="text-muted fw-bold">Nenhum produto encontrado</h4>
@@ -132,7 +148,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th colspan="5" class="text-end">Total Geral:</th>
+                        <th colspan="6" class="text-end">Total Geral:</th>
                         <th>@totalGeral.ToString("C")</th>
                         <th colspan="2"></th>
                     </tr>

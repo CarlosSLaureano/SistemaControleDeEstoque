@@ -1,4 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 html {
   font-size: 14px;
@@ -232,17 +232,45 @@ body {
 }
 
 .sidebar-heading {
-    padding: 2rem 1.25rem;
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #1e293b;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    text-align: center;
-    letter-spacing: -0.5px;
+    width: 100%;
+    padding: 1.2rem 0 1.2rem 29px;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: default;
+    min-height: 72px;
+    box-sizing: border-box;
+}
+
+/* Gradiente aplicado apenas no texto, não no ícone */
+.sidebar-heading .menu-text {
     background: linear-gradient(135deg, #1e293b, #334155);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: -0.3px;
 }
+
+.sidebar-logo-icon {
+    font-size: 1.7rem;
+    flex-shrink: 0;
+    margin-right: 0;
+    /* Força cor independente de herança webkit */
+    color: #1e293b !important;
+    -webkit-text-fill-color: #1e293b !important;
+    transition: margin-right 0.25s ease, transform 0.25s ease;
+}
+
+#sidebar-wrapper:hover .sidebar-logo-icon {
+    margin-right: 14px;
+    transform: scale(1.1);
+}
+
 
 .sidebar-glass {
     padding-top: 20px;
@@ -317,9 +345,8 @@ body {
     transition: opacity 0.3s ease 0.15s;
 }
 
-#sidebar-wrapper .sidebar-heading {
-    text-align: left;
-    white-space: nowrap;
+#sidebar-wrapper:hover .sidebar-heading {
+    padding-left: 1.6rem;
 }
 
 /* Responsividade */
@@ -355,6 +382,112 @@ body {
         border-radius: 10px;
     }
 }
+
+/* =========================================================
+   Estilização Moderna do DataTables & Barra de Busca com Lupa
+   ========================================================= */
+.dataTables_wrapper {
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Campo de Busca com Lupa */
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dt-search {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.dataTables_wrapper .dataTables_filter label,
+.dataTables_wrapper .dt-search label {
+    margin-bottom: 0;
+    font-weight: 500;
+    color: #475569;
+    display: flex;
+    align-items: center;
+}
+
+.dataTables_wrapper .dataTables_filter input,
+.dataTables_wrapper .dt-search input {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border: 1px solid rgba(0, 0, 0, 0.15) !important;
+    border-radius: 20px !important;
+    padding: 0.45rem 1.2rem 0.45rem 2.4rem !important;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='%2364748b'%3E%3Cpath d='M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0s208 93.1 208 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: 12px center !important;
+    background-size: 14px 14px !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    outline: none;
+    min-width: 240px;
+    color: #1e293b;
+}
+
+.dataTables_wrapper .dataTables_filter input:focus,
+.dataTables_wrapper .dt-search input:focus {
+    background-color: #ffffff !important;
+    border-color: #2563eb !important;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15) !important;
+    min-width: 280px;
+}
+
+/* Seletor de registros por página */
+.dataTables_wrapper .dataTables_length select,
+.dataTables_wrapper .dt-length select {
+    border-radius: 10px !important;
+    border: 1px solid rgba(0, 0, 0, 0.15) !important;
+    padding: 0.35rem 0.8rem !important;
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    font-size: 0.88rem;
+    margin: 0 6px;
+    outline: none;
+}
+
+/* Paginação */
+.dataTables_wrapper .dataTables_paginate,
+.dataTables_wrapper .dt-paging {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button,
+.dataTables_wrapper .dt-paging .dt-paging-button {
+    border-radius: 8px !important;
+    padding: 0.35rem 0.75rem !important;
+    border: 1px solid transparent !important;
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    color: #475569 !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover,
+.dataTables_wrapper .dt-paging .dt-paging-button:hover {
+    background: rgba(37, 99, 235, 0.1) !important;
+    color: #2563eb !important;
+    border-color: rgba(37, 99, 235, 0.2) !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dt-paging .dt-paging-button.current {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+}
+
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dt-info {
+    font-size: 0.88rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
 
 
 

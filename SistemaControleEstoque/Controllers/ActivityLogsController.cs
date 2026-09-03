@@ -1,4 +1,4 @@
-﻿using ClosedXML.Excel;
+using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
 using SistemaControleEstoque.Data;
 using SistemaControleEstoque.Filters;
@@ -42,18 +42,25 @@ namespace SistemaControleEstoque.Controllers
         }
 
 
-        public IActionResult ExportarParaExcel(DateTime dataInicio, DateTime dataFim)
+        public IActionResult ExportarParaExcel(DateTime? dataInicio, DateTime? dataFim)
         {
             var tipoUsuario = HttpContext.Session.GetString("TipoUsuario");
 
-            if (tipoUsuario?.ToLower() != "Administrador")
+            if (!string.Equals(tipoUsuario, "Administrador", StringComparison.OrdinalIgnoreCase))
             {
                 TempData["MensagemErro"] = "Acesso restrito a administradores!";
                 return RedirectToAction("Index", "Home");
             }
 
-            var logs = _context.ActivityLogs
-                .Where(l => l.Timestamp >= dataInicio && l.Timestamp <= dataFim.AddDays(1).AddSeconds(-1))
+            var query = _context.ActivityLogs.AsQueryable();
+
+            if (dataInicio.HasValue)
+                query = query.Where(l => l.Timestamp >= dataInicio.Value);
+
+            if (dataFim.HasValue)
+                query = query.Where(l => l.Timestamp <= dataFim.Value.AddDays(1).AddSeconds(-1));
+
+            var logs = query
                 .OrderByDescending(l => l.Timestamp)
                 .ToList();
 
@@ -90,6 +97,33 @@ namespace SistemaControleEstoque.Controllers
                         $"Logs_Atividades_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx");
                 }
             }
+        }
+
+        public IActionResult ExportarParaPdf(DateTime? dataInicio, DateTime? dataFim)
+        {
+            var tipoUsuario = HttpContext.Session.GetString("TipoUsuario");
+
+            if (!string.Equals(tipoUsuario, "Administrador", StringComparison.OrdinalIgnoreCase))
+            {
+                TempData["MensagemErro"] = "Acesso restrito a administradores!";
+                return RedirectToAction("Index", "Home");
+            }
+
+            var query = _context.ActivityLogs.AsQueryable();
+
+            if (dataInicio.HasValue)
+                query = query.Where(l => l.Timestamp >= dataInicio.Value);
+
+            if (dataFim.HasValue)
+                query = query.Where(l => l.Timestamp <= dataFim.Value.AddDays(1).AddSeconds(-1));
+
+            var logs = query
+                .OrderByDescending(l => l.Timestamp)
+                .ToList();
+
+            var pdfBytes = SistemaControleEstoque.Helper.PdfReportHelper.GerarPdfLogs(logs, dataInicio, dataFim);
+
+            return File(pdfBytes, "application/pdf", $"Logs_Atividades_{DateTime.Now:yyyyMMdd_HHmmss}.pdf");
         }
     }
 }

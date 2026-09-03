@@ -1,4 +1,4 @@
-﻿@model List<SistemaControleEstoque.Models.ActivityLog>
+@model List<SistemaControleEstoque.Models.ActivityLog>
 
 @using System
 
@@ -9,44 +9,67 @@
     string dataFim = Context.Request.Query["dataFim"];
 }
 
-<div class="container mt-5 glass-container">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="mb-0 text-dark"><i class="fas fa-clipboard-list"></i> Registro de Atividades</h2>
+<div class="container mt-5">
+    <div class="glass-container">
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+            <h1 class="display-6 mb-0 text-dark d-flex align-items-center">
+                Registro de Atividades
+                <i class="fas fa-clipboard-list ms-2" style="color: #003366;"></i>
+            </h1>
 
-        @if (tipoUsuario.Equals("Administrador", StringComparison.OrdinalIgnoreCase))
-        {
-            <form method="get" asp-controller="ActivityLogs" asp-action="ExportarParaExcel" class="d-flex gap-2 align-items-center">
-                <input type="date" name="dataInicio" class="form-control" value="@dataInicio" required />
-                <input type="date" name="dataFim" class="form-control" value="@dataFim" required />
-                <button type="submit" class="btn btn-success">
-                    <i class="fas fa-file-excel"></i> Exportar Excel
+            @if (tipoUsuario.Equals("Administrador", StringComparison.OrdinalIgnoreCase))
+            {
+                <div class="d-flex gap-2 align-items-center flex-wrap">
+                    <form method="get" asp-controller="ActivityLogs" asp-action="ExportarParaExcel" class="d-inline">
+                        <input type="hidden" name="dataInicio" value="@dataInicio" />
+                        <input type="hidden" name="dataFim" value="@dataFim" />
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-file-excel me-1"></i> Exportar Excel
+                        </button>
+                    </form>
+                    <form method="get" asp-controller="ActivityLogs" asp-action="ExportarParaPdf" class="d-inline">
+                        <input type="hidden" name="dataInicio" value="@dataInicio" />
+                        <input type="hidden" name="dataFim" value="@dataFim" />
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-file-pdf me-1"></i> Exportar PDF
+                        </button>
+                    </form>
+                </div>
+            }
+        </div>
+
+        <!-- Filtro por período -->
+        <form method="get" asp-controller="ActivityLogs" asp-action="Index" class="row mb-4 g-2 align-items-end">
+            <div class="col-md-4">
+                <label class="form-label fw-semibold text-muted small mb-1">Data Início:</label>
+                <input type="date" name="dataInicio" class="form-control" placeholder="Data Início" value="@dataInicio" />
+            </div>
+            <div class="col-md-4">
+                <label class="form-label fw-semibold text-muted small mb-1">Data Fim:</label>
+                <input type="date" name="dataFim" class="form-control" placeholder="Data Fim" value="@dataFim" />
+            </div>
+            <div class="col-md-4 d-flex gap-2">
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-filter me-1"></i>Filtrar
                 </button>
-            </form>
+                <a asp-controller="ActivityLogs" asp-action="Index" class="btn btn-secondary w-100">
+                    <i class="fas fa-broom me-1"></i>Limpar Filtros
+                </a>
+            </div>
+        </form>
+
+        @if (TempData["MensagemErro"] != null)
+        {
+            <div class="alert alert-danger text-center w-50 mx-auto" role="alert">
+                @TempData["MensagemErro"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         }
-    </div>
 
-    <form method="get" asp-controller="ActivityLogs" asp-action="Index" class="row mb-4 g-2">
-        <div class="col-md-4">
-            <input type="date" name="dataInicio" class="form-control" placeholder="Data Início" value="@dataInicio" />
-        </div>
-        <div class="col-md-4">
-            <input type="date" name="dataFim" class="form-control" placeholder="Data Fim" value="@dataFim" />
-        </div>
-        <div class="col-md-4 d-flex gap-2">
-            <button type="submit" class="btn btn-primary w-100">
-                <i class="fas fa-filter me-1"></i>Filtrar
-            </button>
-            <a asp-controller="ActivityLogs" asp-action="Index" class="btn btn-secondary w-100">
-                <i class="fas fa-broom me-1"></i>Limpar Filtros
-            </a>
-        </div>
-    </form>
-
-    @if (Model != null && Model.Any())
-    {
-        <div class="table-responsive">
-            <table class="table ">
-                <thead class="">
+        <!-- Tabela de Logs de Atividade -->
+        <div class="table-responsive mt-3">
+            <table id="table-logs" class="table table-hover">
+                <thead style="background-color: #003366; color: white;">
                     <tr>
                         <th>Usuário</th>
                         <th>Ação</th>
@@ -57,27 +80,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var log in Model)
+                    @if (Model != null && Model.Any())
                     {
-                        <tr>
-                            <td>@log.UserName</td>
-                            <td>@log.Action</td>
-                            <td>@log.Controller</td>
-                            <td>@log.Description</td>
-                            <td>@log.Quantidade</td>
-                            <td>@log.Timestamp.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td>
-                        </tr>
+                        foreach (var log in Model)
+                        {
+                            <tr>
+                                <td><strong>@log.UserName</strong></td>
+                                <td>
+                                    <span class="badge" style="background-color: #003366; font-size: 0.8rem;">@log.Action</span>
+                                </td>
+                                <td>@log.Controller</td>
+                                <td>@log.Description</td>
+                                <td>@(log.Quantidade.HasValue ? log.Quantidade.ToString() : "-")</td>
+                                <td>@log.Timestamp.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td>
+                            </tr>
+                        }
                     }
                 </tbody>
             </table>
         </div>
-    }
-    else
-    {
-        <div class="alert alert-info text-center">
-            Nenhum registro de atividade encontrado.
-        </div>
-    }
+    </div>
 </div>
 
 

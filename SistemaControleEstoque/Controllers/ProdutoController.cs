@@ -1,4 +1,4 @@
-﻿using ClosedXML.Excel;
+using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
 using SistemaControleEstoque.Models;
 using SistemaControleEstoque.Repositorio;
@@ -9,15 +9,18 @@ namespace SistemaControleEstoque.Controllers
     public class ProdutoController : Controller
     {
         private readonly IProdutoRepositorio _produtoRepositorio;
+        private readonly ICategoriaRepositorio _categoriaRepositorio;
         private readonly IActivityLogger _activityLogger;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public ProdutoController(
             IProdutoRepositorio produtoRepositorio,
+            ICategoriaRepositorio categoriaRepositorio,
             IActivityLogger activityLogger,
             IHttpContextAccessor httpContextAccessor)
         {
             _produtoRepositorio = produtoRepositorio;
+            _categoriaRepositorio = categoriaRepositorio;
             _activityLogger = activityLogger;
             _httpContextAccessor = httpContextAccessor;
         }
@@ -45,6 +48,8 @@ namespace SistemaControleEstoque.Controllers
         [HttpGet]
         public IActionResult Criar()
         {
+            ViewBag.Categorias = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(
+                _categoriaRepositorio.BuscarTodos(), "Id", "Nome");
             return View();
         }
 
@@ -73,6 +78,9 @@ namespace SistemaControleEstoque.Controllers
 
             if (produto == null)
                 return NotFound();
+
+            ViewBag.Categorias = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(
+                _categoriaRepositorio.BuscarTodos(), "Id", "Nome", produto.CategoriaId);
 
             return View(produto);
         }
@@ -197,6 +205,24 @@ namespace SistemaControleEstoque.Controllers
                     );
                 }
             }
+        }
+
+        // EXPORTAÇÃO PARA PDF
+        public IActionResult ExportarParaPdf(DateTime? dataInicio, DateTime? dataFim)
+        {
+            var produtos = _produtoRepositorio.BuscarTodos();
+
+            if (dataInicio.HasValue)
+                produtos = produtos
+                    .FindAll(p => p.DataCadastro.HasValue && p.DataCadastro.Value.Date >= dataInicio.Value.Date);
+
+            if (dataFim.HasValue)
+                produtos = produtos
+                    .FindAll(p => p.DataCadastro.HasValue && p.DataCadastro.Value.Date <= dataFim.Value.Date);
+
+            var pdfBytes = SistemaControleEstoque.Helper.PdfReportHelper.GerarPdfProdutos(produtos, dataInicio, dataFim);
+
+            return File(pdfBytes, "application/pdf", $"Produtos_{DateTime.Now:yyyyMMdd_HHmmss}.pdf");
         }
 
         // MÉTODO PRIVADO ASSÍNCRONO PARA REGISTRAR LOG
